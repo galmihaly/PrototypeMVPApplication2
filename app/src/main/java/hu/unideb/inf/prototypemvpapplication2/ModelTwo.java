@@ -10,15 +10,19 @@ import java.util.concurrent.Executors;
 
 public class ModelTwo implements IModelTwo{
 
+    //model adattagjai
     private int number;
 
+    // többszálasításhoz szükséges tagok
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private Handler handler = new Handler(Looper.getMainLooper());
 
+    //konstruktor
     public ModelTwo(int number) {
         this.number = number;
     }
 
+    //működést elvégző függvény
     @Override
     public void addInteger(ModelTwo.OnFinishedListener onFinishedListener) {
         executor.execute(() -> {
@@ -32,10 +36,10 @@ public class ModelTwo implements IModelTwo{
         });
     }
 
+    // getter és setter
     public int getNumber() {
         return number;
     }
-
     public void setNumber(int number) {
         this.number = number;
     }

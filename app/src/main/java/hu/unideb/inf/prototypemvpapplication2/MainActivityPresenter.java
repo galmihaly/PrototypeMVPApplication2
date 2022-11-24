@@ -1,11 +1,7 @@
 package hu.unideb.inf.prototypemvpapplication2;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.transform.Result;
 
 public class MainActivityPresenter implements IMainActivityPresenter{
 
@@ -25,20 +21,19 @@ public class MainActivityPresenter implements IMainActivityPresenter{
         iMainActivityViewList.add(iMainActivityView);
         iMainActivityView.showProgress1();
 
-        Model model = GetModel();
-        model.getNextCourse(this::msda);
+        ModelOne modelOne = GetModel();
+        modelOne.getNextCourse(this::msda);
     }
 
-    void msda(Model model){
+    void msda(ModelOne modelOne){
         if (iMainActivityView == null) return;
 
-        String c = model.getResult();
+        String c = modelOne.getResult();
         String a = String.valueOf(c);
         boolean b = true;
+        ResultModelOne resultModelOne = new ResultModelOne(a, b);
 
-        ResultModel resultModel = new ResultModel(a, b);
-
-        SetModel(resultModel);
+        SetModel(resultModelOne);
     }
 
     @Override
@@ -59,9 +54,9 @@ public class MainActivityPresenter implements IMainActivityPresenter{
         int a = modelTwo.getNumber();
         boolean b = (a%2)==0;
 
-        ResultModel2 resultModel2 = new ResultModel2(a, b);
+        ResultModelTwo resultModelTwo = new ResultModelTwo(a, b);
 
-        SetModelTwo(resultModel2);
+        SetModelTwo(resultModelTwo);
     }
 
     @Override
@@ -70,7 +65,7 @@ public class MainActivityPresenter implements IMainActivityPresenter{
     }
 
     @Override
-    public Model GetModel() {
+    public ModelOne GetModel() {
         return iMainActivityView.GetModel();
     }
 
@@ -80,14 +75,11 @@ public class MainActivityPresenter implements IMainActivityPresenter{
     }
 
     @Override
-    public void SetModelTwo(ResultModel2 resultModel2) {
-
-        iMainActivityView.SetModelTwo(resultModel2);
-    }
+    public void SetModelTwo(ResultModelTwo resultModelTwo) {iMainActivityView.SetModelTwo(resultModelTwo);}
 
     @Override
-    public void SetModel(ResultModel resultModel) {
-        iMainActivityView.SetModel(resultModel);
+    public void SetModel(ResultModelOne resultModelOne) {
+        iMainActivityView.SetModel(resultModelOne);
     }
 
 }

@@ -5,8 +5,8 @@ public interface IMainActivityPresenter {
     void onButtonClick();
     void onAddButtonClick();
     void onDestroy();
-    Model GetModel();
+    ModelOne GetModel();
     ModelTwo GetModelTwo();
-    void SetModelTwo(ResultModel2 resultModel2);
-    void SetModel(ResultModel resultModel);
+    void SetModelTwo(ResultModelTwo resultModelTwo);
+    void SetModel(ResultModelOne resultModelOne);
 }

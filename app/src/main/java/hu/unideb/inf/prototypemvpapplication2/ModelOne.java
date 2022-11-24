@@ -5,16 +5,12 @@ import android.os.Looper;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import android.os.Handler;
-import android.util.Log;
 
-public class Model implements IModel {
+public class ModelOne implements IModelOne {
 
     private List<String> arrayList = Arrays.asList(
             "DSA Self Paced: Master the basics of Data Structures and Algorithms to solve complex problems efficiently. ",
@@ -33,12 +29,12 @@ public class Model implements IModel {
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private Handler handler = new Handler(Looper.getMainLooper());
 
-    public Model(String result) {
+    public ModelOne(String result) {
         this.result = result;
     }
 
     @Override
-    public void getNextCourse(Model.OnFinishedListener onFinishedListener) {
+    public void getNextCourse(ModelOne.OnFinishedListener onFinishedListener) {
 
         executor.execute(() ->{
 
