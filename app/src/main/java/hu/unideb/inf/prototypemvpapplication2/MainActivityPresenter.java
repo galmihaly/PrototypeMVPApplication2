@@ -22,10 +22,10 @@ public class MainActivityPresenter implements IMainActivityPresenter{
         iMainActivityView.showProgress1();
 
         ModelOne modelOne = GetModel();
-        modelOne.getNextCourse(this::msda);
+        modelOne.getNextCourse(this::initResultModelOne);
     }
 
-    void msda(ModelOne modelOne){
+    void initResultModelOne(ModelOne modelOne){
         if (iMainActivityView == null) return;
 
         String c = modelOne.getResult();
@@ -45,10 +45,10 @@ public class MainActivityPresenter implements IMainActivityPresenter{
         iMainActivityView.showProgress2();
 
         ModelTwo modelTwo = GetModelTwo();
-        modelTwo.addInteger(this::msda2);
+        modelTwo.addInteger(this::initResultModelTwo);
     }
 
-    void msda2(ModelTwo modelTwo){
+    void initResultModelTwo(ModelTwo modelTwo){
         if (iMainActivityView == null) return;
 
         int a = modelTwo.getNumber();
