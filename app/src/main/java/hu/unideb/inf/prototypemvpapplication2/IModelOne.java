@@ -6,5 +6,5 @@ public interface IModelOne {
         void onFinished(ModelOne modelOne);
     }
 
-    void getNextCourse(IModelOne.OnFinishedListener onFinishedListener);
+    ModelOne getText(ModelOne modelOne);
 }

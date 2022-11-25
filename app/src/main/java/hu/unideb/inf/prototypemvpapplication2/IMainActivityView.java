@@ -4,10 +4,7 @@ public interface IMainActivityView {
 
     void showProgress1();
     void showProgress2();
-
-    ModelOne GetModel();
-    ModelTwo GetModelTwo();
-    void SetModelTwo(ResultModelTwo resultModelTwo);
+    void SetModelTwo(AdditionResponseModel additionResponseModel);
     void SetModel(ResultModelOne resultModelOne);
 
 }

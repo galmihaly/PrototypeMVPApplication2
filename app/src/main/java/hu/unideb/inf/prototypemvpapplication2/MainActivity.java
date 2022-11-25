@@ -40,8 +40,21 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
 
         mainActivityPresenter = new MainActivityPresenter(this);
 
-        addTextButton.setOnClickListener(v -> mainActivityPresenter.onButtonClick());
-        addNumberButton.setOnClickListener(view -> mainActivityPresenter.onAddButtonClick());
+        addTextButton.setOnClickListener(v -> {
+
+            progressBar.setVisibility(View.VISIBLE);
+            textView.setVisibility(View.INVISIBLE);
+            ModelOne modelOne = new ModelOne(textView.getText().toString());
+
+            mainActivityPresenter.onButtonClick(modelOne);
+        });
+        addNumberButton.setOnClickListener(view -> {
+
+            numberTextView.setVisibility(View.INVISIBLE);
+            AdditionRequestModelTwo additionRequestModelTwo = new AdditionRequestModelTwo(Integer.parseInt(numberTextView.getText().toString()));
+
+            mainActivityPresenter.onAddButtonClick(additionRequestModelTwo);
+        });
     }
 
     @Override
@@ -52,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mainActivityPresenter.onDestroy();
     }
 
     @Override
@@ -67,13 +79,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     @Override
-    public ModelOne GetModel() {
-        progressBar.setVisibility(View.VISIBLE);
-        textView.setVisibility(View.INVISIBLE);
-        return new ModelOne(textView.getText().toString());
-    }
-
-    @Override
     public void SetModel(ResultModelOne resultModelOne) {
         progressBar.setVisibility(GONE);
         textView.setVisibility(View.VISIBLE);
@@ -81,14 +86,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     @Override
-    public ModelTwo GetModelTwo() {
-        numberTextView.setVisibility(View.INVISIBLE);
-        return new ModelTwo(Integer.parseInt(numberTextView.getText().toString()));
-    }
-
-    @Override
-    public void SetModelTwo(ResultModelTwo resultModelTwo) {
+    public void SetModelTwo(AdditionResponseModel additionResponseModel) {
         numberTextView.setVisibility(View.VISIBLE);
-        numberTextView.setText(String.valueOf(resultModelTwo.resultNumber));
+        numberTextView.setText(String.valueOf(additionResponseModel.resultNumber));
     }
 }
