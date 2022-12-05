@@ -14,10 +14,10 @@ package hu.unideb.inf.prototypemvpapplication2;
 // logoláshoz használt osztály, amely olyan tagokat tartalmaz, amelyek segítségével a program futása során keletkező hibákat és program használatát tudjuk nyilvántartani
 public class LogObjects {
 
-    private LogLevel loggingLevel;
-    private StackTraceElement stackTraceElement;
-    private String zonedDateTime;
-    private String message;
+    private final LogLevel loggingLevel;
+    private final StackTraceElement stackTraceElement;
+    private final String zonedDateTime;
+    private final String message;
 
     public LogObjects(LogLevel loggingLevel, StackTraceElement stackTraceElement, String zonedDateTime, String message) {
         this.loggingLevel = loggingLevel;
