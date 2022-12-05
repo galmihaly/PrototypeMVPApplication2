@@ -1,9 +1,10 @@
 package hu.unideb.inf.prototypemvpapplication2;
 
-import android.os.Debug;
 import android.os.Handler;
 import android.os.Looper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Function;
@@ -12,7 +13,6 @@ import java.util.function.Consumer;
 public class MainActivityPresenter implements IMainActivityPresenter{
 
     private IMainActivityView iMainActivityView;
-    ///private List<IMainActivityView> iMainActivityViewList = new ArrayList<>();
 
     public MainActivityPresenter(IMainActivityView iMainActivityView) {
         this.iMainActivityView = iMainActivityView;
@@ -21,11 +21,11 @@ public class MainActivityPresenter implements IMainActivityPresenter{
     @Override
     public void onButtonClick(ModelOne modelOne) { // VárakozósButton
         iMainActivityView.showProgress1();
-        dolgoz(modelOne, this::maki1, this::maki2);
+        work(modelOne, this::maki1, this::maki2);
     }
 
 //public void dolgoz(Function<Void,Object> maki1, Function<Object,Void> maki2 ){
-    public <T,R> void dolgoz(T model, Function<T,R> function1, Consumer<R> function2 ){
+    public <T,R> void work(T model, Function<T,R> function1, Consumer<R> function2 ){
         if(iMainActivityView == null) return;
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -35,7 +35,7 @@ public class MainActivityPresenter implements IMainActivityPresenter{
             try
             {
                 R o = function1.apply(model);
-                MyLogger.error("hello");
+                LogObjects.error("hello");
                 handler.postDelayed(() -> {
                     function2.accept((R)o);
                 }, 500);
@@ -76,12 +76,11 @@ public class MainActivityPresenter implements IMainActivityPresenter{
     public void onAddButtonClick(AdditionRequestModelTwo additionRequestModelTwo) {
 
         iMainActivityView.showProgress2();
-        dolgoz(additionRequestModelTwo, this::osszead1, iMainActivityView::SetModelTwo);
+        work(additionRequestModelTwo, this::osszead1, iMainActivityView::SetModelTwo);
     }
 
     public AdditionResponseModel osszead1(AdditionRequestModelTwo additionRequestModelTwo)
     {
-        //AdditionRequestModel additionRequestModel = iMainActivityView.GetModelTwo(); // OsszeadasRequestModel //  GetOsszeadasRequestModel
         int a = AdditionHelper.addInteger(additionRequestModelTwo.number, 1);
         boolean b = getModelTwoBoolean(additionRequestModelTwo.number); // remBy2
         AdditionResponseModel additionResponseModel = new AdditionResponseModel(a,b); // OsszeadsResponseModel

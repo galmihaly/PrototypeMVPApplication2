@@ -11,6 +11,16 @@ package hu.unideb.inf.prototypemvpapplication2;
 */
 
 
+import android.annotation.SuppressLint;
+import android.os.Debug;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
+
 // logoláshoz használt osztály, amely olyan tagokat tartalmaz, amelyek segítségével a program futása során keletkező hibákat és program használatát tudjuk nyilvántartani
 public class LogObjects {
 
@@ -52,5 +62,45 @@ public class LogObjects {
 
     public String getStackTraceMethodName(){
         return this.stackTraceElement.getMethodName();
+    }
+
+    public static LogObjects error(String errorMeesage){
+
+        // -> 4. színtű Trace bejegyzés lekérdezése a Stack Traceből
+        StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[3];
+
+        // idő lekédezése
+        String zonedDateTime = getUTCDateTimeString();
+
+        LogObjects logObject = new LogObjects(LogLevel.ERROR, stackTraceElement, zonedDateTime, errorMeesage);
+
+        Log.e("k:", logObject.toString());
+
+        return logObject;
+    }
+
+    public static void error(Exception exceptionObject){}
+
+    public static String getUTCDateTimeString(){
+        Calendar date = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+
+        return df.format(date.getTimeInMillis()) + " " + date.getTimeZone().getID();
+    }
+
+    @NonNull
+    @SuppressLint("DefaultLocale")
+    @Override
+    public String toString() {
+        return String.format("[%s] -> (%s) - Üzenet: %s, Fájlnév: %s, Osztálynév: %s, Függvény: %s, Hibasor: %d",
+                this.getLoggingLevel(),
+                this.getZonedDateTime(),
+                this.getMessage(),
+                this.getStackTraceFileName(),
+                this.getStackTraceClassName(),
+                this.getStackTraceMethodName(),
+                this.getStackTraceLineNumber());
     }
 }

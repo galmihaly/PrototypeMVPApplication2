@@ -20,39 +20,5 @@ public class MyLogger {
     public static void trace(List<LogObjects> listOfLogObjects){}
      */
 
-    public static LogObjects error(String errorMeesage){
 
-        StackTraceElement stackTraceElement = getStackTraceElement(4);
-        String zonedDateTime = getUTCDateTimeString();
-
-        /*Log.e("x:", zonedDateTime);
-        Log.e("ü:", stackTraceElement.getClassName());
-        Log.e("ü:", stackTraceElement.getFileName());
-        Log.e("ü:", String.valueOf(stackTraceElement.getLineNumber()));
-        Log.e("ü:", stackTraceElement.getMethodName());*/
-
-        LogObjects logObject = new LogObjects(LogLevel.ERROR, stackTraceElement, zonedDateTime, errorMeesage);
-
-        return logObject;
-    }
-
-    public static StackTraceElement getStackTraceElement(int traceLevel){
-        /*StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        for(int i = 0; i < stackTraceElements.length; i++){
-            Log.e("ü:", stackTraceElements[i].getClassName() + "-" + stackTraceElements[i].getFileName() + "-" + stackTraceElements[i].getLineNumber() + "-" + stackTraceElements[i].getMethodName());
-        }*/
-
-        return Thread.currentThread().getStackTrace()[traceLevel];
-    }
-
-    public static String getUTCDateTimeString(){
-        Calendar date = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-
-        return df.format(date.getTimeInMillis()) + " " + date.getTimeZone().getID();
-    }
-
-    public static void error(Exception exceptionObject){}
 }
