@@ -1,9 +1,6 @@
 package hu.unideb.inf.prototypemvpapplication2;
 
 
-import java.time.ZonedDateTime;
-
-
 /*
 * -> FATAL	100	The application is unusable. Action needs to be taken immediately.
 * -> ERROR	200	An error occurred in the application.
@@ -18,13 +15,13 @@ import java.time.ZonedDateTime;
 public class LogObjects {
 
     private LogLevel loggingLevel;
-    private StackTraceElement traceElement;
+    private StackTraceElement stackTraceElement;
     private String zonedDateTime;
     private String message;
 
-    public LogObjects(LogLevel loggingLevel, StackTraceElement traceElement, String zonedDateTime, String message) {
+    public LogObjects(LogLevel loggingLevel, StackTraceElement stackTraceElement, String zonedDateTime, String message) {
         this.loggingLevel = loggingLevel;
-        this.traceElement = traceElement;
+        this.stackTraceElement = stackTraceElement;
         this.zonedDateTime = zonedDateTime;
         this.message = message;
     }
@@ -41,19 +38,19 @@ public class LogObjects {
         return message;
     }
 
-    public String getClassName(){
-        return this.traceElement.getClassName();
+    public String getStackTraceClassName(){
+        return this.stackTraceElement.getClassName();
     }
 
-    public String getFileName(){
-        return this.traceElement.getFileName();
+    public String getStackTraceFileName(){
+        return this.stackTraceElement.getFileName();
     }
 
-    public int getLineNumber(){
-        return this.traceElement.getLineNumber();
+    public int getStackTraceLineNumber(){
+        return this.stackTraceElement.getLineNumber();
     }
 
-    public String getMethodName(){
-        return this.traceElement.getMethodName();
+    public String getStackTraceMethodName(){
+        return this.stackTraceElement.getMethodName();
     }
 }
