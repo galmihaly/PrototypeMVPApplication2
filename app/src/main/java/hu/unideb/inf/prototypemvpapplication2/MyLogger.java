@@ -1,7 +1,6 @@
 package hu.unideb.inf.prototypemvpapplication2;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,9 +31,9 @@ public class MyLogger {
         Log.e("ü:", String.valueOf(stackTraceElement.getLineNumber()));
         Log.e("ü:", stackTraceElement.getMethodName());*/
 
-        LogObjects logObjects = new LogObjects(LogLevel.ERROR, stackTraceElement, zonedDateTime, errorMeesage);
+        LogObjects logObject = new LogObjects(LogLevel.ERROR, stackTraceElement, zonedDateTime, errorMeesage);
 
-        return null;
+        return logObject;
     }
 
     public static StackTraceElement getStackTraceElement(int traceLevel){
