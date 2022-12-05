@@ -1,5 +1,6 @@
 package hu.unideb.inf.prototypemvpapplication2;
 
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -34,6 +35,7 @@ public class MainActivityPresenter implements IMainActivityPresenter{
             try
             {
                 R o = function1.apply(model);
+                MyLogger.error("hello");
                 handler.postDelayed(() -> {
                     function2.accept((R)o);
                 }, 500);
@@ -46,6 +48,7 @@ public class MainActivityPresenter implements IMainActivityPresenter{
     }
 
     public ResultModelOne maki1(ModelOne modelOne){
+
         for (int i = 0; i < 60; i++) {
             try {
                 Thread.sleep(500);
@@ -54,7 +57,6 @@ public class MainActivityPresenter implements IMainActivityPresenter{
             }
         }
 
-        //ModelOne modelOne = iMainActivityView.GetModel();
         String n = TextHelper.getText(modelOne.arrayList);
         boolean i = getModelOneBoolean(n);
         ResultModelOne resultModelOne = new ResultModelOne(n, i);
@@ -85,11 +87,6 @@ public class MainActivityPresenter implements IMainActivityPresenter{
         AdditionResponseModel additionResponseModel = new AdditionResponseModel(a,b); // OsszeadsResponseModel
         return additionResponseModel;
     }
-
-//    public void osszead2(AdditionResponseModel o)
-//    {
-//        if(o != null) iMainActivityView.SetModelTwo(o);
-//    }
 
     @Override
     public boolean getModelTwoBoolean(int a){
